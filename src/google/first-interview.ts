@@ -3,7 +3,7 @@ const global_dict = new Set([
   'PREMS',
   'DSEMS',
   'PREWS',
-  'PRDSS',
+  'PRDSM',
   'ESEMS',
   'PREMS',
   'PRMSS',
