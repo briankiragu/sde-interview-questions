@@ -9,3 +9,6 @@ out
 
 # OS files
 .DS_Store
+
+# Virtual environments
+.venv
