@@ -39,32 +39,42 @@ def is_winner(x: int, nums: list[int]) -> str | None:
     score: dict[str, int] = {"Maria": 0, "Ben": 0}
 
     # Loop through the rounds.
-    for i in range(x):
-        # Set the current player.
-        # playerIndex: int
+    for current_round in range(x):
+        # Define the current winner of the round.
+        winner: str | None = list(score.keys())[-1]
 
         # Create the set of numbers for this round.
-        number_set: list[int] = list(range(1, nums[i] + 1))
+        number_set: list[int] = list(range(1, nums[current_round] + 1))
 
-        prime: int | None = find_prime(number_set)
+        # Define a variable to hold the number of attempts to find a prime.
+        number_of_attempts: int = 0
 
-        # Check for prime numbers in the set.
+        # While a prime number is in the set...
+        while find_prime(nums=number_set):
+            # Based on the current iteration, get the current player.
+            winner = list(score.keys())[number_of_attempts % 2]
 
-        # Return false if none are found.
-        #
+            # Check for prime numbers in the set.
+            prime: int | None = find_prime(number_set)
 
-        # Get the multiples of the prime number.
-        #
+            # If
+            # Get the multiples of the prime number.
+            prime_multiples: list[int] = find_prime_multiples(
+                prime=prime, nums=number_set
+            )
 
-        # Remove the prime number and its multiples from the the set.
-        #
+            # Remove the prime number and its multiples from the the set.
+            number_set = list(set(number_set) - set(prime_multiples))
 
-        # Return the subset.
-        #
-        pass
+            # Return the subset.
+            number_of_attempts += 1
+
+        # Set the winner of the current round.
+        if winner:
+            score[winner] += 1
 
     # If no winner, return None.
-    return None
+    return max(score, key=score.get)  # type: ignore
 
 
 def find_prime(nums: list[int]) -> int | None:
@@ -100,5 +110,11 @@ def find_prime(nums: list[int]) -> int | None:
     return prime
 
 
+def find_prime_multiples(prime: int, nums: list[int]) -> list[int]:
+    """For each prime, return its multiples (modulo to 0)"""
+    return [multiple for multiple in nums if multiple % prime == 0]
+
+
 if __name__ == "__main__":
-    is_winner(3, [4, 5, 1])
+    our_winner: str | None = is_winner(3, [4, 5, 1])
+    print(our_winner)
