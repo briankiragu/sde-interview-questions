@@ -12,3 +12,6 @@ out
 
 # Virtual environments
 .venv
+
+# Python byte code
+*.pyc
