@@ -108,3 +108,8 @@ def find_prime(nums: list[int]) -> int | None:
                 break
 
     return prime
+
+
+if __name__ == "__main__":
+    our_winner: str | None = is_winner(4, [15, 6, 17, 100])
+    print(our_winner)
