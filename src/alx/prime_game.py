@@ -57,14 +57,14 @@ def is_winner(x: int, nums: list[int]) -> str | None:
             # Check for prime numbers in the set.
             prime: int | None = find_prime(number_set)
 
-            # If
             # Get the multiples of the prime number.
-            prime_multiples: list[int] = find_prime_multiples(
-                prime=prime, nums=number_set
-            )
+            prime_multiples: list[int] = [
+                multiple for multiple in number_set if multiple % prime == 0
+            ]
 
             # Remove the prime number and its multiples from the the set.
             number_set = list(set(number_set) - set(prime_multiples))
+            number_set.sort()
 
             # Return the subset.
             number_of_attempts += 1
@@ -93,7 +93,7 @@ def find_prime(nums: list[int]) -> int | None:
         # Get a subset of all the numbers before the current index.
         divisors: list[int] = nums[:i]
 
-        # Tentatively assume this number is prime.
+        # Tentatively, assume this number is prime.
         prime = num
 
         for divisor in divisors:
@@ -110,11 +110,6 @@ def find_prime(nums: list[int]) -> int | None:
     return prime
 
 
-def find_prime_multiples(prime: int, nums: list[int]) -> list[int]:
-    """For each prime, return its multiples (modulo to 0)"""
-    return [multiple for multiple in nums if multiple % prime == 0]
-
-
 if __name__ == "__main__":
-    our_winner: str | None = is_winner(3, [4, 5, 1])
+    our_winner: str | None = is_winner(4, [15, 6, 17, 100])
     print(our_winner)
