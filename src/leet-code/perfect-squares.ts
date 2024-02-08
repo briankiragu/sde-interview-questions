@@ -22,7 +22,35 @@
  * 1 <= n <= 104
  */
 const numSquares = (n: number): number => {
-  return n;
+  let count: number = 0;
+  let localN: number = n;
+  let squares: number[] = [];
+
+  // Get all squares between 1 and n.
+  for (let i = 1; i < n; i++) {
+    const square = i ** 2;
+
+    if (square > n) {
+      break;
+    }
+
+    squares.push(square);
+  }
+
+  // Subtract a square until 0.
+  while (localN > 0) {
+    // Get the items in the squares that are less than
+    // or equal to the localN.
+    squares = squares.filter((square) => square <= localN);
+
+    // Subtract the max of the squares from the localN.
+    localN -= Math.max(...squares);
+
+    // Add the count.
+    count++;
+  }
+
+  return count;
 };
 
 export default numSquares;
