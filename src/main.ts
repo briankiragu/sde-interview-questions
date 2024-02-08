@@ -12,7 +12,7 @@ const emails2: string[] = [
   'c@leetcode.com',
 ];
 
-console.dir({
-  emails1: numUniqueEmails(emails1),
-  emails2: numUniqueEmails(emails2),
-});
+const uniqueEmails1 = numUniqueEmails(emails1);
+const uniqueEmails2 = numUniqueEmails(emails2);
+
+console.dir({ uniqueEmails1, uniqueEmails2 });
