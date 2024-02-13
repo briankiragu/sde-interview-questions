@@ -12,6 +12,7 @@ out
 
 # Virtual environments
 .venv
+.pytest_cache
 
 # Python byte code
 *.pyc
