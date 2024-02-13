@@ -27,9 +27,8 @@ const numSquares = (n: number): number => {
   let squares: number[] = [];
 
   // Get all squares between 1 and n.
-  for (let i = 1; i < n; i++) {
+  for (let i = 1; i <= n; i++) {
     const square = i ** 2;
-
     if (square > n) {
       break;
     }
