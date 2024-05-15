@@ -30,6 +30,20 @@
  * less than O(n2) time complexity?
  */
 
-const twoSum = (nums: number[], target: number): number[] => {};
+const twoSum = (nums: number[], target: number): number[] | undefined => {
+  for (let i = 0; i < nums.length; i++) {
+    // Start from the next index after i.
+    for (let j = i + 1; j < nums.length; j++) {
+      // If the pair of values add up to the target,
+      // break the loop and return them.
+      if (nums[i] + nums[j] === target) {
+        return [i, j];
+      }
+    }
+  }
+
+  // Return the pair
+  return undefined;
+};
 
 export default twoSum;
