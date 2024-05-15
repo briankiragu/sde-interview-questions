@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'bun:test';
 import oddEvenJumps from '../../src/leet-code/odd-even-jump';
 
-describe('odd-even-jump', () => {
+describe('Odd-Even-Jump', () => {
   it('Returns 2', () => {
     expect(oddEvenJumps([10, 13, 12, 14, 15])).toBe(2);
   });
