@@ -29,7 +29,6 @@
  * Follow-up: Can you come up with an algorithm that is
  * less than O(n2) time complexity?
  */
-
 const twoSum = (nums: number[], target: number): number[] | undefined => {
   // Create a hash map to store
   const hashMap: Map<number, number> = new Map();
@@ -38,7 +37,7 @@ const twoSum = (nums: number[], target: number): number[] | undefined => {
     // If the difference between the target and the current value
     // exists as a value in the map, return the key stored under that value.
     if (hashMap.has(target - nums[i])) {
-      return [i, hashMap.get(target - nums[i])!];
+      return [hashMap.get(target - nums[i])!, i];
     }
 
     // Add the value and index (key, pair respecitively) to the map.
