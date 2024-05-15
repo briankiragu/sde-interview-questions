@@ -32,15 +32,17 @@
 
 const twoSum = (nums: number[], target: number): number[] | undefined => {
   // Create a hash map to store
+  const hashMap: Map<number, number> = new Map();
+
   for (let i = 0; i < nums.length; i++) {
-    // Start from the next index after i.
-    for (let j = i + 1; j < nums.length; j++) {
-      // If the pair of values add up to the target,
-      // break the loop and return them.
-      if (nums[i] + nums[j] === target) {
-        return [i, j];
-      }
+    // If the difference between the target and the current value
+    // exists as a value in the map, return the key stored under that value.
+    if (hashMap.has(target - nums[i])) {
+      return [i, hashMap.get(target - nums[i])!];
     }
+
+    // Add the value and index (key, pair respecitively) to the map.
+    hashMap.set(nums[i], i);
   }
 
   // Return the pair
