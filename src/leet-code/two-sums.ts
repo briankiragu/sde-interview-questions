@@ -31,6 +31,7 @@
  */
 
 const twoSum = (nums: number[], target: number): number[] | undefined => {
+  // Create a hash map to store
   for (let i = 0; i < nums.length; i++) {
     // Start from the next index after i.
     for (let j = i + 1; j < nums.length; j++) {

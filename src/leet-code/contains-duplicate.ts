@@ -22,18 +22,18 @@
 const containsDuplicate = (nums: number[]): boolean => {
   // Declare a hash map to save the numbers and
   // the number of times they appear.
-  let hashMap: Record<string, number> = {};
+  const hashMap: Map<number, number> = new Map();
 
   for (let i = 0; i < nums.length; i++) {
     // If the value already exists in the hash map,
     // then it was already recorded. In that case,
     // break the loop and return `true`.
-    if (nums[i] in hashMap) {
+    if (hashMap.has(nums[i])) {
       return true;
     }
 
     // Add the value to the hashmap
-    hashMap = { ...hashMap, [nums[i]]: 1 };
+    hashMap.set(nums[i], 1);
   }
 
   return false;
