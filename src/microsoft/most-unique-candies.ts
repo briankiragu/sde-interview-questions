@@ -1,4 +1,4 @@
-const solution = (A: number[], B: number[]): number => {
+const mostUniqueCandies = (A: number[], B: number[]): number => {
   // Get the number of coins available (N/2).
   const coins = A.length / 2;
 
@@ -23,4 +23,4 @@ const solution = (A: number[], B: number[]): number => {
   return candiesFromA + candiesFromB;
 };
 
-export default solution;
+export default mostUniqueCandies;
