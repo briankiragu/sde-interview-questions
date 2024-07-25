@@ -22,9 +22,7 @@ describe("Prime decomposition", () => {
     expect(primeDecomposition(32)).toStrictEqual([2, 2, 2, 2, 2]);
   });
 
-  test("100000 returns [2,2,2,2,2,5,5,5,5,5]", () => {
-    expect(primeDecomposition(100000)).toStrictEqual([
-      2, 2, 2, 2, 2, 5, 5, 5, 5, 5,
-    ]);
+  test("135237 returns [3,61,739]", () => {
+    expect(primeDecomposition(135237)).toStrictEqual([3, 61, 739]);
   });
 });
