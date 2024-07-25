@@ -34,12 +34,12 @@ const longestSubstring = (word?: string, k?: number): number => {
       const theStackIsFull: boolean = stackOfRecentLetters.size === k;
 
       if (isANewLetter) {
-        if (!theStackIsFull) {
-          stackOfRecentLetters.add(letter);
-        } else {
+        if (theStackIsFull) {
           lengthsOfLargestSubstrings.push(lengthOfSubstring);
           break;
         }
+
+        stackOfRecentLetters.add(letter);
       }
 
       // Increment the length of the largest substing
