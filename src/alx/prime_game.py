@@ -1,4 +1,5 @@
-"""Maria and Ben are playing a game. Given a set of consecutive integers
+"""
+Maria and Ben are playing a game. Given a set of consecutive integers
 starting from 1 up to and including n, they take turns choosing a prime number
 from the set and removing that number and its multiples from the set.
 The player that cannot make a move loses the game.
@@ -35,46 +36,56 @@ Ben wins because there are no prime numbers for Maria to choose
 
 def is_winner(x: int, nums: list[int]) -> str | None:
     """Implementation of the Prime Game"""
-    # Set of players.
-    score: dict[str, int] = {"Maria": 0, "Ben": 0}
 
-    # Loop through the rounds.
-    for current_round in range(x):
-        # Define the current winner of the round.
-        winner: str | None = list(score.keys())[-1]
+    try:
+        # If x is less than 0, raise an error
+        if x < 0:
+            raise ValueError("'x' is less than 0. Try again")
 
-        # Create the set of numbers for this round.
-        number_set: list[int] = list(range(1, nums[current_round] + 1))
+        # Set of players.
+        score: dict[str, int] = { "Maria": 0, "Ben": 0 }
 
-        # Define a variable to hold the number of attempts to find a prime.
-        number_of_attempts: int = 0
+        # Loop through the rounds.
+        for current_round in range(x):
+            # Define the current winner of the round.
+            winner: str | None = list(score.keys())[-1]
 
-        # While a prime number is in the set...
-        while find_prime(nums=number_set):
-            # Based on the current iteration, get the current player.
-            winner = list(score.keys())[number_of_attempts % 2]
+            # Create the set of numbers for this round.
+            number_set: list[int] = list(range(1, nums[current_round] + 1))
 
-            # Check for prime numbers in the set.
-            prime: int | None = find_prime(number_set)
+            # Define a variable to hold the number of attempts to find a prime.
+            number_of_attempts: int = 0
 
-            # Get the multiples of the prime number.
-            prime_multiples: list[int] = [
-                multiple for multiple in number_set if multiple % prime == 0
-            ]
+            # While a prime number is in the set...
+            while find_prime(nums=number_set):
+                # Based on the current iteration, get the current player.
+                winner = list(score.keys())[number_of_attempts % 2]
 
-            # Remove the prime number and its multiples from the the set.
-            number_set = list(set(number_set) - set(prime_multiples))
-            number_set.sort()
+                # Check for prime numbers in the set.
+                prime: int | None = find_prime(number_set)
 
-            # Return the subset.
-            number_of_attempts += 1
+                # Get the multiples of the prime number.
+                prime_multiples: list[int] = [
+                    multiple for multiple in number_set
+                    if prime and (multiple % prime == 0)
+                ]
 
-        # Set the winner of the current round.
-        if winner:
-            score[winner] += 1
+                # Remove the prime number and its multiples from the the set.
+                number_set = list(set(number_set) - set(prime_multiples))
+                number_set.sort()
 
-    # If no winner, return None.
-    return max(score, key=score.get)  # type: ignore
+                # Return the subset.
+                number_of_attempts += 1
+
+            # Set the winner of the current round.
+            if winner:
+                score[winner] += 1
+
+        # If no winner, return None.
+        return max(score, key=score.get)  # type: ignore
+
+    except ValueError as exc:
+        raise ValueError(exc) from exc
 
 
 def find_prime(nums: list[int]) -> int | None:
