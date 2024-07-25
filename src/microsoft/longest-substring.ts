@@ -15,37 +15,40 @@
  * Can we assume this fits memory?
  *  Yes
  */
-
-const longestSubstring = (str?: string, k?: number): number => {
-  // Throw an error if any of the inputs is invalid.
-  if (str === undefined || k === undefined)
+const longestSubstring = (word?: string, k?: number): number => {
+  if (word === undefined || k === undefined)
     throw new Error("Second input is invalid");
 
-  // If the string is smaller than 'k', return 0.
-  if (k > str.length) return 0;
+  if (k > word.length) return 0;
 
-  // Variables to hold the current largest substring and
-  // stack of recent characters.
-  let lengthOfLargestSubstring: number = 0;
-  let recentCharactersStack: string[] = [];
+  const lengthsOfLargestSubstrings: number[] = [];
 
-  for (let i = 0; i < str.length; i++) {
-    // If the recent characters stack is full (same size as k)
-    // and the current character is not in the stack,
-    // reset the stack and skip the current iteration of the loop.
-    if (
-      recentCharactersStack.length === k &&
-      !recentCharactersStack.includes(str[i])
-    ) {
-      recentCharactersStack = [];
-      continue;
-    }
+  // Starting at each letter of the word...
+  for (let i = 0; i < word.length; i += 1) {
+    const stackOfRecentLetters: Set<string> = new Set();
+    let lengthOfSubstring: number = 0;
 
-    // If the current char is not in the stack, add it.
-    if (!recentCharactersStack.includes(str[i])) {
-      recentCharactersStack.push(str[i]);
+    // Starting at that letter
+    for (const letter of word.slice(i)) {
+      const isANewLetter: boolean = !stackOfRecentLetters.has(letter);
+      const theStackIsFull: boolean = stackOfRecentLetters.size === k;
+
+      if (isANewLetter) {
+        if (!theStackIsFull) {
+          stackOfRecentLetters.add(letter);
+        } else {
+          lengthsOfLargestSubstrings.push(lengthOfSubstring);
+          break;
+        }
+      }
+
+      // Increment the length of the largest substing
+      lengthOfSubstring += 1;
     }
   }
+
+  // Return the length of the largest substring.
+  return Math.max(...lengthsOfLargestSubstrings);
 };
 
 export default longestSubstring;
