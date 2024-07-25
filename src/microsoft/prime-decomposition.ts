@@ -10,14 +10,13 @@ const primeDecomposition = (x: number): number[] => {
       return acc;
     }, []);
 
-  while (temp > 1) {
-    for (const prime of primes) {
-      if (temp % prime === 0) {
-        decompositions.push(prime);
-        temp = temp / prime;
-        break;
-      }
+  for (const prime of primes) {
+    while (temp % prime === 0) {
+      decompositions.push(prime);
+      temp = temp / prime;
     }
+
+    if (temp === 1) break;
   }
 
   return decompositions;
