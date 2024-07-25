@@ -16,3 +16,7 @@ out
 
 # Python byte code
 *.pyc
+
+# Environment variables files
+.env*
+!.env.example
