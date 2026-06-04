@@ -1,4 +1,6 @@
-﻿// Given the root of a binary tree, return its maximum depth.
+﻿import type { TreeNode } from "./TreeNode";
+
+// Given the root of a binary tree, return its maximum depth.
 // A binary tree's maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
 
 // Example 1:
@@ -27,19 +29,14 @@
  *     }
  * }
  */
-const maxDepth = (root: TreeNode | null): number => {
-  let max: number = 0;
 
-  if (root !== null) {
-    max++;
+export const maxDepth = (root: TreeNode | null): number => {
+  const depth: number = 0;
 
-    if (root.left && root.right) {
-      max += Math.max(maxDepth(root.left), maxDepth(root.right));
-    }
-  }
+  if (root === null) return depth;
 
-  return max;
+  return depth + 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
 
-  // Time: O(n)
-  // Space: O(1)
+  // Time:    O(n)
+  // Space:   O(1)
 };
